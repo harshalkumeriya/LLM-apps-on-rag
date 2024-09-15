@@ -2,7 +2,7 @@ from elasticsearch import Elasticsearch
 
 
 index_name = "mf-faq"
-es_client = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es_client = Elasticsearch("http://localhost:9200")
 print(es_client.info())
 
 
