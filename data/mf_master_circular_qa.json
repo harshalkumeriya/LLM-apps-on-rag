@@ -1,0 +1,46 @@
+[
+    {
+        "question": [
+            {
+                "question": "What is the purpose of the Master Circular for Mutual Funds?",
+                "answer": "The Master Circular for Mutual Funds is prepared to compile all applicable circulars issued by SEBI for effective regulation of the Mutual Fund Industry."
+            },
+            {
+                "question": "What are the two parts of the Offer Document that Mutual Funds must prepare?",
+                "answer": "The Offer Document shall have two parts: Scheme Information Document (SID) and Statement of Additional Information (SAI)."
+            },
+            {
+                "question": "What is the maximum percentage of total assets that illiquid securities can account for in a scheme?",
+                "answer": "The aggregate value of illiquid securities under a scheme shall not exceed 15% of the total assets of the scheme."
+            },
+            {
+                "question": "What is the penalty for failing to dispatch redemption proceeds within the stipulated time?",
+                "answer": "The AMC(s) shall be liable to pay interest at the rate of 15% per annum to the unit holders for delays in dispatching redemption or repurchase proceeds."
+            },
+            {
+                "question": "What is the requirement for filing the Offer Document with SEBI?",
+                "answer": "All offer documents of Mutual Fund schemes shall be filed with SEBI in terms of the Regulations."
+            },
+            {
+                "question": "What is the cut-off time for determining the applicable NAV for liquid fund schemes?",
+                "answer": "For liquid fund schemes, if the application is received up to 2:00 p.m., the closing NAV of the day immediately preceding the day of receipt of application is applicable."
+            },
+            {
+                "question": "What is the requirement for Mutual Funds regarding the disclosure of large unit holdings?",
+                "answer": "The number of investors holding over 25% of the NAV in a scheme and their total holdings in percentage terms shall be disclosed in the Statement of Accounts issued after the NFO and also in the Half Yearly and Annual Results."
+            },
+            {
+                "question": "What is the role of the Audit Committee in a Mutual Fund?",
+                "answer": "The Audit Committee, constituted by the Trustees, reviews the internal audit systems and ensures that rectifications suggested by internal and external auditors are acted upon."
+            },
+            {
+                "question": "What is the requirement for Mutual Funds regarding the appointment of independent directors?",
+                "answer": "Mutual Funds are required to have a minimum of 50% independent directors on the Board of the AMC and two-thirds independent trustees."
+            },
+            {
+                "question": "What is the guideline for the distribution of proceeds realized from illiquid securities or NPAs?",
+                "answer": "Mutual Funds shall distribute such amounts to the old investors if realized amounts are substantial and within two years; otherwise, they may be transferred to the Investor Education Fund."
+            }
+        ]
+    }
+]
