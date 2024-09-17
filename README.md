@@ -15,7 +15,7 @@ docker network create rag-network
 
 - build & run the docker container
 ```bash
-docker run -d --name elasticsearch --net rag-network -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:8.4.3
+docker run -d --name elasticsearch-1 --net rag-network -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.4.3
 ```
 
 ## Python library installation
