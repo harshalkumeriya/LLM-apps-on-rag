@@ -11,3 +11,4 @@ langchain-text-splitters==0.3.0
 langchain-openai==0.2.0
 openai==1.45.1
 pypdf==4.3.1
+sentence_transformers==2.7.0

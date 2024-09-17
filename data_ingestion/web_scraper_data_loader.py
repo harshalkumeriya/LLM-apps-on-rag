@@ -1,4 +1,5 @@
 import requests
+from requests import Response
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
@@ -13,13 +14,13 @@ def _get_full_answer(txt: str) -> str:
     # print(output)
     return output
 
-def get_data(website_url):
+def get_data(website_url: str) -> Response:
     # Send a request to the FAQ page
     response = requests.get(website_url)
     response.raise_for_status()  # Check if the request was successful
     return response
 
-def scrape_data(response) -> list[dict]:
+def scrape_data(response: Response) -> list[dict]:
     scraped_data = []
     # Parse the FAQ page with the Strainer
     soup = BeautifulSoup(response.text, 'html.parser')

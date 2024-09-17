@@ -4,9 +4,9 @@
 from elasticsearch import Elasticsearch
 import json
 
-
 # Specify the filename
 filename = '/data/mutual_fund_faq.json'
+index_name = "mf-faq"
 
 try:
     with open(filename, 'r', encoding='utf-8') as file:
@@ -18,10 +18,6 @@ except json.JSONDecodeError:
     print(f"Error decoding JSON from the file {filename}.")
 except IOError as e:
     print(f"An error occurred: {e}")
-
-
-es_client = Elasticsearch("http://localhost:9200")
-print(es_client.info())
 
 index_settings = {
     "settings": {
@@ -38,7 +34,8 @@ index_settings = {
     }
 }
 
-index_name = "mf-faq"
+es_client = Elasticsearch("http://localhost:9200")
+print(es_client.info())
 es_client.indices.create(index=index_name, body=index_settings)
 
 from tqdm.auto import tqdm
