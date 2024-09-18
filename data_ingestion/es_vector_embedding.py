@@ -36,7 +36,7 @@ class EmbeddingGenerator:
     def generate_embeddings(self, documents):
         embeded_documents = []
         for doc in documents:
-            doc["text_vector"] = self.model.encode(doc["text"]).tolist()
+            doc["text_encoding"] = self.model.encode(doc["answer"]).tolist()
             embeded_documents.append(doc)
         return embeded_documents
 
@@ -62,7 +62,7 @@ class ElasticsearchHandler:
         return self.client.search(
             index=index_name, 
             knn=query,
-            source=["text", "section", "question", "answer"]
+            source=["section", "question", "answer", "link"]
         )
 
 
