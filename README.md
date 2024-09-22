@@ -25,7 +25,7 @@ Note: replace placeholder <your-user-name>
 - run the below command in the projects root directory
 
 ```python
-pip install -r requirements.txt
+pip install -r requirements.txt --quiet
 ```
 
 

@@ -1,10 +1,7 @@
-# https://python.langchain.com/docs/integrations/vectorstores/elasticsearch/
-# https://python.langchain.com/api_reference/huggingface/embeddings/langchain_huggingface.embeddings.huggingface.HuggingFaceEmbeddings.html#
 import os
 
 from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
-import numpy as np
 from dotenv import load_dotenv
 
 from helpers import (
@@ -16,18 +13,20 @@ from helpers import (
 
 # Disable tokenizers parallelism to avoid the warning
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-load_dotenv()
-# os.environ["OPENAI_API_KEY"] = <your-token-key>
+load_dotenv() # OR os.environ["OPENAI_API_KEY"] = <your-token-key>
 
 
 class DocumentIndexer:
-    def __init__(self, config):
+    """this class convert text to vector embedding, create vector index in elastcisearch 
+    and store documents in the elasticsearch document store.
+    """
+    def __init__(self, config: VectorConfig):
         self.config = config
         self.document_loader = DocumentLoader()
         self.embedding_generator = EmbeddingGenerator(config.embedding_model)
         self.es_handler = ElasticsearchHandler(config.es_host)
 
-    def index_documents(self, index_settings):
+    def index_documents(self, index_settings: dict):
         # Step 1: Load documents
         documents = self.document_loader.load_documents(self.config.filename)
         if len(documents) > 0:
@@ -37,10 +36,11 @@ class DocumentIndexer:
             self.es_handler.create_index(self.config.index_name, index_settings)
             # Step 4: Add documents to index
             self.es_handler.index_documents(self.config.index_name, embeded_documents)
+            return 
         else:
-            raise Exception("documents are empty.")
+            raise Exception("documents are empty.") 
 
-    def search_documents(self, search_term, k=5, candidates=50):
+    def search_documents(self, search_term:str, k:int=5, candidates:int=50):
         vector_search_term = self.embedding_generator.model.encode(search_term)
         query = {
             "field": "text_encoding",
