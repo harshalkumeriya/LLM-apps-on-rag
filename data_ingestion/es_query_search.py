@@ -1,5 +1,4 @@
-from common import Config
-from common import ElasticsearchHandler
+from helpers.common import Config, ElasticsearchHandler
 
 
 # # Example query: Search for documents where the question contains 'KYC'

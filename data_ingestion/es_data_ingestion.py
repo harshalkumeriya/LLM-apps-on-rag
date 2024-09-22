@@ -1,7 +1,8 @@
-from common import DocumentLoader
-from common import ElasticsearchHandler
-from common import Config
-
+from helpers.common import (
+    DocumentLoader,
+    ElasticsearchHandler,
+    Config
+)
 
 class DocumentIndexer:
     def __init__(self, config: Config, document_loader: DocumentLoader, es_handler: ElasticsearchHandler):

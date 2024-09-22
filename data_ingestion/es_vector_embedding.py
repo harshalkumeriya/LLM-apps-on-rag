@@ -1,7 +1,11 @@
 from sentence_transformers import SentenceTransformer
 from tqdm.auto import tqdm
 
-from common import ElasticsearchHandler, DocumentLoader, VectorConfig
+from helpers.common import (
+    ElasticsearchHandler, 
+    DocumentLoader, 
+    VectorConfig
+)
 
 
 # EmbeddingGenerator class handles the generation of embeddings

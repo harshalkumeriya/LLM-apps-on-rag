@@ -15,12 +15,14 @@ class QA(BaseModel):
     question: str = Field(description="Question from the PDF")
     answer: str = Field(description="Answer corresponding to the question from PDF")
 
+
 class PDFContentExtractor:
     @staticmethod
     def extract_content(pdf_path: str) -> str:
         loader = PyPDFLoader(pdf_path)
         documents = loader.load()
         return " ".join(doc.page_content for doc in documents)
+
 
 class QuestionAnswerGenerator:
     def __init__(self, api_key: str):
@@ -66,12 +68,14 @@ class QuestionAnswerGenerator:
         chain = prompt | self.llm | parser
         return chain.invoke({"chunk": chunk})
 
+
 class JSONSaver:
     @staticmethod
     def save_to_json(data: list[QA], output_file: str) -> None:
         with open(output_file, "w") as f:
             json.dump(data, f, indent=4)
         print(f"Question and answer dataset saved to {output_file}")
+
 
 def create_qa_dataset(pdf_path: str, output_file: str, parser: JsonOutputParser, openai_api_key: str) -> None:
     # Step 1: Extract content from PDF
@@ -86,8 +90,8 @@ def create_qa_dataset(pdf_path: str, output_file: str, parser: JsonOutputParser,
 
 if __name__ == "__main__":
     # Provide the path to your PDF and the OpenAI API key
-    pdf_path = "./data/Master Circular for Mutual Funds.pdf"
-    output_file = "./data/mf_master_circular_qa.json"
+    pdf_path = "../data/inputs/Master Circular for Mutual Funds.pdf"
+    output_file = "../data/outputs/mf_master_circular_qa.json"
     openai_api_key = os.environ["OPENAI_API_KEY"]
     
     # Set up a parser + inject instructions into the prompt template.

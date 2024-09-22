@@ -20,8 +20,23 @@ docker run -d --name elasticsearch-1 --net rag-network -p 9200:9200 -e "discover
 
 ## Python library installation
 
+- set python path
+```bash
+export PYTHONPATH=$PYTHONPATH:/Users/<your-user-name>/LLM-apps-on-rag
+```
+Note: replace placeholder <your-user-name>
+
 - run the below command in the projects root directory
 
 ```python
 pip install -r requirements.txt
 ```
+
+
+## Data Sources
+
+- Website:
+    * [Mutual Funds Sahi Hai](https://www.mutualfundssahihai.com/en/your-questions)
+    * [Association of Mutual Funds India](https://www.amfiindia.com/investor-corner/investor-center/investor-faq.html)
+
+- Mutual Funds related PDFs published by SEBI 
