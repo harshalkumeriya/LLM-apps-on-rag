@@ -1,20 +1,7 @@
 from elasticsearch import Elasticsearch
+from sentence_transformers import SentenceTransformer
 from tqdm.auto import tqdm
 import json
-
-
-class Config:
-    FILENAME = '../data/outputs/mutual_fund_faq.json'
-    INDEX_NAME = "mf-faq-std"
-    ES_HOST = "http://localhost:9200"
-
-
-# Define a configuration class for reusable settings
-class VectorConfig:
-    filename = '../data/outputs/mutual_fund_faq.json'
-    index_name = "mf-faq"
-    embedding_model = "all-mpnet-base-v2"
-    es_host = "http://localhost:9200"
 
 
 # DocumentLoader class handles loading documents from a fi
@@ -35,6 +22,22 @@ class DocumentLoader:
         except IOError as e:
             print(f"An error occurred: {e}")
             return []
+
+
+# EmbeddingGenerator class handles the generation of embeddings
+class EmbeddingGenerator:
+    def __init__(self, model_name):
+        self.model = SentenceTransformer(model_name)
+
+    def generate_embeddings(self, documents):
+        embeded_documents = []
+        for doc in documents:
+            doc["text_encoding"] = self.model.encode(doc["answer"]).tolist()
+            embeded_documents.append(doc)
+        return embeded_documents
+    
+    def encode(self, text):
+        return self.model.encode(text)
 
 
 class ElasticsearchHandler:

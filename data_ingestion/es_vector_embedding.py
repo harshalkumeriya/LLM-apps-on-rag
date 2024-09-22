@@ -1,24 +1,11 @@
-from sentence_transformers import SentenceTransformer
 from tqdm.auto import tqdm
 
-from helpers.common import (
+from helpers import (
     ElasticsearchHandler, 
+    EmbeddingGenerator,
     DocumentLoader, 
     VectorConfig
 )
-
-
-# EmbeddingGenerator class handles the generation of embeddings
-class EmbeddingGenerator:
-    def __init__(self, model_name):
-        self.model = SentenceTransformer(model_name)
-
-    def generate_embeddings(self, documents):
-        embeded_documents = []
-        for doc in documents:
-            doc["text_encoding"] = self.model.encode(doc["answer"]).tolist()
-            embeded_documents.append(doc)
-        return embeded_documents
 
 
 class DocumentIndexer:
@@ -31,12 +18,15 @@ class DocumentIndexer:
     def index_documents(self, index_settings):
         # Step 1: Load documents
         documents = self.document_loader.load_documents(self.config.filename)
-        # Step 2: Create embeddings
-        embeded_documents = self.embedding_generator.generate_embeddings(documents)
-        # Step 3: Create mapping & index
-        self.es_handler.create_index(self.config.index_name, index_settings)
-        # Step 4: Add documents to index
-        self.es_handler.index_documents(self.config.index_name, embeded_documents)
+        if len(documents) > 0:
+            # Step 2: Create embeddings
+            embeded_documents = self.embedding_generator.generate_embeddings(documents)
+            # Step 3: Create mapping & index
+            self.es_handler.create_index(self.config.index_name, index_settings)
+            # Step 4: Add documents to index
+            self.es_handler.index_documents(self.config.index_name, embeded_documents)
+        else:
+            raise Exception("documents are empty.")
 
     def search_documents(self, search_term, k=5, candidates=50):
         vector_search_term = self.embedding_generator.model.encode(search_term)
@@ -72,7 +62,7 @@ if __name__ == "__main__":
     }
     indexer = DocumentIndexer(VectorConfig)
     indexer.index_documents(index_settings)
-    search_results = indexer.search_documents("what is debt mutual fund?")
+    search_results = indexer.search_documents("what is debt mutual fund?", k=2)
     for hit in search_results['hits']['hits']:
         print(f"ID: {hit['_id']}")
         print(f"\nSection:\n {hit['_source']['section']}")

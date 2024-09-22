@@ -1,4 +1,4 @@
-from helpers.common import (
+from helpers import (
     DocumentLoader,
     ElasticsearchHandler,
     Config
